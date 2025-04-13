@@ -3,19 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <title>Egg Timer</title>
+    <link rel="stylesheet" href="styles.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
-    <h1>Welcome to Egg Timer</h1>
-    <button onclick="countdown()">Start Timer</button>
-    <p id="countdown">100</p>
+    <h1>Welcome to 💥EGG TIMER💥</h1>
+    <button onclick="countdown(0,10)">Supersonic Boil</button>
+    <button onclick="countdown(6,0)">Soft Boil</button>
+    <button onclick="countdown(8,0)">Medium Boil</button>
+    <button onclick="countdown(10,0)">Hard Boil</button>
+    <p id="timer"><span id="minutesID"></span>m<span id="secondsID"></span>s</p>
 </body>
 <script>
-    function countdown(){
-        let number = 100;
-        setInterval(function(){
-            number -= 1;
-            $("#countdown").html(number);
+    function countdown(minutes, seconds){
+        //let seconds = parseInt($("#secondsID").text(), 10);  //takes the integer value of secondsID
+        //let minutes = parseInt($("#minutesID").text(), 10);
+        $("#minutesID").html(minutes);
+        $("#secondsID").html(seconds);
+
+        setInterval(function(){  //Can't use while statements inside a setInterval!
+            if(seconds > 0) {
+                seconds -= 1;
+                $("#secondsID").html(seconds);
+            }
+            else if(minutes > 0){
+                minutes -= 1;
+                seconds = 59;
+                $("#minutesID").html(minutes);
+                $("#secondsID").html(seconds);
+            }
+            else{
+                $("#timer").html("EGG DONE!");
+            }
+
         }, 1000);
     }
 </script>
